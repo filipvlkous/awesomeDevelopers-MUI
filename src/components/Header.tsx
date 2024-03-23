@@ -1,12 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Container,
-  IconButton,
-  Menu,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 export default function Header() {
   return (

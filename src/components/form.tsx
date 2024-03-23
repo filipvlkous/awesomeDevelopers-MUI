@@ -12,15 +12,19 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import { useDispatch, useSelector } from "react-redux";
 import { DataObj, addRow } from "../Redux/DataSlice";
 import { RootState } from "../Redux/Store";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const variants = ["Marketing", "It", "Sales", "Managment", "Accounting"];
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null);
   const nbRows = useSelector((state: RootState) => state.rows);
   const dispatch = useDispatch();
+  const [checked, setChecked] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (checked === false) return;
+
     const formEle = e.target as HTMLFormElement;
 
     const formData = new FormData(formEle);
@@ -40,7 +44,7 @@ export default function Form() {
       department: formData.get("department") as string,
     };
     dispatch(addRow(data));
-
+    setChecked(false);
     formRef.current?.reset();
   };
 
@@ -96,7 +100,12 @@ export default function Form() {
             ))}
           </TextField>
           <Stack direction="row" spacing={2} alignItems={"center"}>
-            <Checkbox sx={{ paddingLeft: "12px" }} />
+            <Checkbox
+              checked={checked}
+              value={checked}
+              sx={{ paddingLeft: "12px" }}
+              onClick={() => setChecked(!checked)}
+            />
             <Typography>I agree to be added to the table</Typography>
           </Stack>
           <Stack direction={"row"} spacing={2} justifyContent={"center"}>
@@ -106,6 +115,7 @@ export default function Form() {
               sx={{ borderRadius: 25 }}
               size="medium"
               type="reset"
+              onClick={() => setChecked(false)}
             >
               Reset form
             </Button>

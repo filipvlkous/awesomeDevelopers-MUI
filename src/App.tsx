@@ -1,4 +1,4 @@
-import { AppBar, Container, Grid, Toolbar } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Index from "./components";
 import Header from "./components/Header";
@@ -23,7 +23,6 @@ const theme = createTheme({
     },
     secondary: {
       main: "#878787",
-      dark: "#ba000d",
     },
   },
 });
@@ -34,12 +33,7 @@ function App() {
       <div style={{ backgroundColor: "#F5F5F5", height: "100vh" }}>
         <Header />
         <Container maxWidth="xl">
-          <Grid
-            // sx={{ paddingInline: 5, paddingTop: 5 }}
-            columns={{ xs: 1, md: 12 }}
-            container
-            spacing={6}
-          >
+          <Grid columns={{ xs: 1, md: 12 }} container spacing={6}>
             <Grid item xs={1} sm={3}>
               <Form />
             </Grid>
