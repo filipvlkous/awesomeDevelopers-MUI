@@ -5,7 +5,7 @@ export type DataObj = {
   email: string;
   department: string;
 };
-type CounterState = {
+export type DataState = {
   rows: DataObj[];
 };
 
@@ -18,7 +18,7 @@ const retrievedArray = JSON.parse(localStorage.getItem("myArray") || "[]");
 /**
  * The initial state for the data slice is set to the retrieved array.
  */
-const initialState: CounterState = {
+const initialState: DataState = {
   rows: retrievedArray,
 };
 

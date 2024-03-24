@@ -55,7 +55,6 @@ export default function Form() {
       borderRadius={2}
       boxShadow={2}
       p={2}
-      // minWidth={"400px"}
     >
       <Typography variant="h6">Add new visitor</Typography>
       <Typography variant="subtitle1" fontWeight={"light"}>
@@ -64,7 +63,6 @@ export default function Form() {
       <Box
         component={"form"}
         onSubmit={handleSubmit}
-        // onReset={onReset}
         sx={{ paddingTop: 2 }}
         ref={formRef}
       >
@@ -84,7 +82,7 @@ export default function Form() {
             name="Email"
             label="Email"
             placeholder="john@email.com"
-            // required
+            required
             color="secondary"
             focused
           />
@@ -111,10 +109,14 @@ export default function Form() {
               checked={checked}
               value={checked}
               sx={{ paddingLeft: "12px" }}
-              onClick={() => setChecked(!checked)}
+              required
+              onClick={() => {
+                setChecked(!checked);
+              }}
             />
             <Typography>I agree to be added to the table</Typography>
           </Stack>
+
           <Stack direction={"row"} spacing={2} justifyContent={"center"}>
             <Button
               variant="outlined"

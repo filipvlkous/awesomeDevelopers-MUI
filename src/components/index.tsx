@@ -126,6 +126,7 @@ export default function Index() {
         </Button>
       </Stack>
       <DataGrid
+        localeText={{ noRowsLabel: "" }}
         rowHeight={75}
         sx={{ border: "none" }}
         rows={nbRows}
@@ -138,7 +139,6 @@ export default function Index() {
           // Set check to true if there is at least one selected row.
           // Set check to false if there are no selected rows.
           setCheck(isSelected);
-
           // Update the selected rows.
           setRowSelectionModel(newRowSelectionModel);
         }}
