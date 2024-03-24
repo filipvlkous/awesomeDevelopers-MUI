@@ -39,9 +39,9 @@ export default function Form() {
 
     const data: DataObj = {
       id: uniqueId,
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      department: formData.get("department") as string,
+      name: formData.get("Name") as string,
+      email: formData.get("Email") as string,
+      department: formData.get("Department") as string,
     };
     dispatch(addRow(data));
     setChecked(false);
@@ -55,6 +55,7 @@ export default function Form() {
       borderRadius={2}
       boxShadow={2}
       p={2}
+      // minWidth={"400px"}
     >
       <Typography variant="h6">Add new visitor</Typography>
       <Typography variant="subtitle1" fontWeight={"light"}>
@@ -69,23 +70,28 @@ export default function Form() {
       >
         <Stack spacing={3}>
           <TextField
-            name="name"
+            data-testid="Name"
+            type="input"
+            name="Name"
             label="Name"
             placeholder="John"
             color="secondary"
             focused
           />
           <TextField
+            data-testid="Email"
             type="email"
-            name="email"
+            name="Email"
             label="Email"
             placeholder="john@email.com"
-            required
+            // required
             color="secondary"
             focused
           />
           <TextField
-            name="department"
+            type="option"
+            data-testid="Department"
+            name="Department"
             id="outlined-select-currency"
             label="Department"
             defaultValue="Marketing"
@@ -101,6 +107,7 @@ export default function Form() {
           </TextField>
           <Stack direction="row" spacing={2} alignItems={"center"}>
             <Checkbox
+              data-testid="Checkbox"
               checked={checked}
               value={checked}
               sx={{ paddingLeft: "12px" }}
@@ -122,7 +129,7 @@ export default function Form() {
             <Button
               variant="contained"
               startIcon={<PersonIcon />}
-              sx={{ borderRadius: 25 }}
+              sx={{ borderRadius: 25, width: 200 }}
               size="medium"
               type="submit"
             >

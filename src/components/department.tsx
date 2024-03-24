@@ -1,31 +1,20 @@
 import { Chip } from "@mui/material";
 
-export default function DepartmentChip({ name }: { name: string }) {
-  let colorChipBg;
+const departmentColors = {
+  Marketing: "#0000FF",
+  It: "#FF4233",
+  Sales: "#33FF35",
+  Managment: "#E1AD29",
+  Accounting: "#BE29E1",
+} as const;
 
-  switch (name) {
-    case "Marketing":
-      colorChipBg = "blue";
-      break;
-    case "It":
-      colorChipBg = "red";
-      break;
-    case "Sales":
-      colorChipBg = "green";
-      break;
-    case "Managment":
-      colorChipBg = "orange";
-      break;
-    case "Accounting":
-      colorChipBg = "purple";
-      break;
-    default:
-      colorChipBg = "blue";
-      break;
-  }
+export default function DepartmentChip({ name }: { name: string }) {
+  const colorChipBg =
+    departmentColors[name as keyof typeof departmentColors] || "#79767A";
 
   return (
     <Chip
+      data-testid="Chip"
       label={name}
       sx={{
         backgroundColor: colorChipBg,

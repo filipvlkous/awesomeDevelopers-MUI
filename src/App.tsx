@@ -33,11 +33,15 @@ function App() {
       <div style={{ backgroundColor: "#F5F5F5", height: "100vh" }}>
         <Header />
         <Container maxWidth="xl">
-          <Grid columns={{ xs: 1, md: 12 }} container spacing={6}>
-            <Grid item xs={1} sm={3}>
+          <Grid
+            columns={{ xs: 1, sm: 1, md: 12, lg: 12 }}
+            container
+            spacing={6}
+          >
+            <Grid item xs={1} sm={1} md={4} lg={3}>
               <Form />
             </Grid>
-            <Grid item xs={1} md={9}>
+            <Grid item xs={1} sm={1} md={8} lg={9}>
               <Index />
             </Grid>
           </Grid>

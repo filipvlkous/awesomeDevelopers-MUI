@@ -5,7 +5,7 @@ import {
   GridRenderCellParams,
   GridRowSelectionModel,
 } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/Store";
 import { DataObj, setRows } from "../Redux/DataSlice";
@@ -52,7 +52,6 @@ export default function Index() {
   const removeRow = () => {
     // Remove the selected rows from the state
     dispatch(setRows(deleteRows()));
-    // Set the checkbox to unchecked
     setCheck(false);
   };
   /**
@@ -78,12 +77,19 @@ export default function Index() {
    * @returns {DataObj[]} Array of rows that are not selected
    */
   const deleteRows = (): DataObj[] => {
-    // filter metoda O(n)
     const foundItems = nbRows.filter(
       (item) => !rowSelectionModel.includes(item.id)
     );
     return foundItems;
   };
+
+  // If some rows are selected, set interCheck to true.
+  // If all rows are selected, set interCheck to false.
+  useEffect(() => {
+    const isSelected = rowSelectionModel.length > 0;
+    const isAllRowsSelected = rowSelectionModel.length === nbRows.length;
+    setInterCheck(!isAllRowsSelected && isSelected);
+  }, [rowSelectionModel, nbRows]);
 
   return (
     <Box
@@ -101,6 +107,9 @@ export default function Index() {
 
       <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
         <Checkbox
+          value={check}
+          typeof="checkbox"
+          data-testid="CustomCheckbox"
           indeterminate={interCheck}
           checked={check}
           sx={{ paddingLeft: "12px" }}
@@ -125,13 +134,7 @@ export default function Index() {
         checkboxSelection
         disableRowSelectionOnClick
         onRowSelectionModelChange={(newRowSelectionModel: any) => {
-          // If some rows are selected, set interCheck to true.
-          // If all rows are selected, set interCheck to false.
           const isSelected = newRowSelectionModel.length > 0;
-          const isAllRowsSelected =
-            newRowSelectionModel.length === nbRows.length;
-          setInterCheck(!isAllRowsSelected && isSelected);
-
           // Set check to true if there is at least one selected row.
           // Set check to false if there are no selected rows.
           setCheck(isSelected);

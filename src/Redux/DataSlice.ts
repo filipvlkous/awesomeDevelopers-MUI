@@ -37,10 +37,9 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     setRows(state, action) {
-      const rows = action.payload;
-      const arrayString = JSON.stringify(rows);
+      const arrayString = JSON.stringify(action.payload);
       localStorage.setItem("myArray", arrayString);
-      state.rows = rows;
+      state.rows = action.payload;
     },
     addRow(state, action: PayloadAction<DataObj>) {
       state.rows.push(action.payload); // push the payload onto the state array
